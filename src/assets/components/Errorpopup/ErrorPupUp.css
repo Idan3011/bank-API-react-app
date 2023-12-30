@@ -1,0 +1,33 @@
+.error-popup{
+    position: fixed;
+    width: 20rem;
+    height: 20rem;
+    background-color: #f7f7f7f7;
+    border: 0.2rem solid red;
+    display: flex;
+    flex-direction: column;
+    z-index: 4;
+    justify-content: center;
+    align-items: center;
+    gap:1rem;
+    padding:2rem;
+    border-radius: 0.5rem;
+}
+
+.error-popup p {
+    color: black;
+    text-align: center;
+}
+.error-btn-close{
+    background-color: green;
+    border:none;
+    color:#f7f7f7f7;
+    width: 4rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+}
+
+.error-btn-close:hover{
+    background-color: #f7f7f7f7;
+    color:green
+}
