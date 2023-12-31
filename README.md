@@ -81,7 +81,4 @@ The project is structured as a React application for the front end, communicatin
 ## Getting Started
 
 1. Clone the repository: `https://github.com/Idan3011/bank-API-react-app`
-2. Install dependencies: `npm install`
-3. Start the React app: `npm start`
-4. Start the Express server: `npm run server`
-5. Netlify: `https://aquamarine-heliotrope-4b45ac.netlify.app`
+2. Netlify: `https://aquamarine-heliotrope-4b45ac.netlify.app`
