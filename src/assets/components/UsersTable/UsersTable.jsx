@@ -4,7 +4,7 @@ import axios from "../../../../data/usersAPI";
 import Spinner from "../spinner/Spinner";
 import DipositCash from "../DipostCash/DipositCash";
 import AddUserForm from "../AddUserForm/AddUserForm";
-
+import { v4 as uuidv4 } from "uuid";
 const UsersTable = () => {
   const [bankUsers, setBankUsers] = useState([]);
   const [addUserButton, setAddUserButton] = useState(false);
@@ -14,6 +14,7 @@ const UsersTable = () => {
   const [dipositUserId, setDipositUserId] = useState("");
   const [buttonClicked, setIsButtonClicked] = useState(false);
   const [userToDiposit, setUserToDipositTo] = useState(null);
+
 
   const handleDeleteUser = (userId) => {
     try {
@@ -26,15 +27,20 @@ const UsersTable = () => {
     setDepositCashOrCredit(true);
     setDipositUserId(userId);
     setUserToDipositTo(userName);
- 
   };
   useEffect(() => {
     const diposit = `${cashOrcredit}Deposit`;
     const fetchData = async () => {
       try {
-        await axios.put(`/users/${dipositUserId}/${cashOrcredit}Deposit`, {
-          [diposit]: Number(cashOrcreditDiposit),
-        });
+        const response = await axios.put(
+          `/users/${dipositUserId}/${cashOrcredit}Deposit`,
+          {
+            [diposit]: Number(cashOrcreditDiposit),
+          }
+        );
+        setBankUsers((prevUsers) =>
+          prevUsers.map((user) => (user.id === dipositUserId ? response : user))
+        );
       } catch (error) {
         console.log("Error: ", error);
       }
@@ -46,7 +52,7 @@ const UsersTable = () => {
       diposit.length > 0
     ) {
       fetchData();
-      
+      setDepositCashOrCredit(false)
     }
   }, [cashOrcredit, cashOrcreditDiposit, dipositUserId]);
   useEffect(() => {
@@ -66,12 +72,12 @@ const UsersTable = () => {
     setTimeout(() => {
       fetchUsers();
     }, 2000);
-  }, []);
+  }, [cashOrcredit, cashOrcreditDiposit, dipositUserId]);
 
   const handleClick = () => {
     setAddUserButton(true);
   };
-
+  useEffect(() => {}, [depositCashOrCredit]);
   return (
     <>
       <div className="UsersTable">
@@ -146,6 +152,7 @@ const UsersTable = () => {
             setIsButtonClicked={setIsButtonClicked}
             userToDiposit={userToDiposit}
             buttonClicked={buttonClicked}
+            key={uuidv4()}
           />
         ) : null}
       </div>

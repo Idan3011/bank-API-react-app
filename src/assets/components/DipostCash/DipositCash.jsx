@@ -10,10 +10,11 @@ const DipositCash = ({
   buttonClicked,
 }) => {
   const [dipositPopupClose, setDipositPopupClose] = useState(false);
-
+const [ButtonClicked, setButtonClicked] = useState(buttonClicked)
   const hadnelClosePopup = () => {
     setDipositPopupClose(true);
-    setDepositCashOrCredit(false);
+    setButtonClicked(false)
+    
   };
   const handleClick = (val) => {
     if (val === "cash") {
@@ -22,14 +23,13 @@ const DipositCash = ({
     } else {
       setCashOrCredit("credit");
       setIsButtonClicked(true);
-      
     }
   };
 
   return (
     <div
       className="cash-diposit-popup"
-      style={{ display: dipositPopupClose || buttonClicked ? "none" : "flex" }}
+      style={{ display: dipositPopupClose || ButtonClicked ? "none" : "flex" }}
     >
       <h4>dipsoit cash or creadit to: '{userToDiposit}'</h4>'
       <TextField
